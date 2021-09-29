@@ -4,10 +4,11 @@
 <br/>
 <div class="p-5 mb-4 bg-light rounded-3">
 <div class="container-fluid py-5"> 
-<div class="container horizontal-scrollable">
-<div class="row"> 
+
+<div class="horizontal-scrollable">
+
 <% @courses.each do |course| %>
-<div class="col">
+<div class="item">
 <div class="card card text-white bg-primary" style="width: 18rem;">
   <div class="card-body">
     <h5 class="card-title"><%= course.name %></h5>
@@ -18,7 +19,7 @@
 <br/>
 </div>
 <% end %>
-</div>
+
 </div>
 
 <br>

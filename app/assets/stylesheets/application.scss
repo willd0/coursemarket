@@ -1,1 +1,12 @@
 @import "bootstrap";
+
+.horizontal-scrollable {
+  overflow-x: auto;
+  white-space: nowrap;
+  display: flex;
+}
+
+.item {
+  padding-right: 50px;
+}
+
