@@ -1,6 +1,5 @@
 class SectionsController < ApplicationController
   before_action :set_section, only: %i[ show edit update destroy ]
-
   # GET /sections or /sections.json
   def index
     @sections = Section.all
@@ -13,6 +12,7 @@ class SectionsController < ApplicationController
   # GET /sections/new
   def new
     @section = Section.new
+    
   end
 
   # GET /sections/1/edit
@@ -21,11 +21,13 @@ class SectionsController < ApplicationController
 
   # POST /sections or /sections.json
   def create
-    @section = Section.new(section_params)
+     @course = Course.find(params[:course_id])
+     @section = @course.sections.create(section_params)
+     
 
     respond_to do |format|
       if @section.save
-        format.html { redirect_to @section, notice: "Section was successfully created." }
+        format.html { redirect_to course_sections_path, notice: "Section was successfully created." }
         format.json { render :show, status: :created, location: @section }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -51,7 +53,7 @@ class SectionsController < ApplicationController
   def destroy
     @section.destroy
     respond_to do |format|
-      format.html { redirect_to sections_url, notice: "Section was successfully destroyed." }
+      format.html { redirect_to course_sections_url, notice: "Section was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -64,6 +66,6 @@ class SectionsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def section_params
-      params.require(:section).permit(:name, :section_id, :section_number)
+      params.require(:section).permit(:name, :section_id, :section_number, :course_id)
     end
 end
