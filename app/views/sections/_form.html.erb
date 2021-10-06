@@ -1,10 +1,10 @@
-<%= form_with(model: [@section, course], url: course_sections_path, local: true) do |form| %>
-  <% if section.errors.any? %>
+<%= form_with(model: @section, url: course_sections_path, local: true) do |form| %>
+  <% if @section.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(section.errors.count, "error") %> prohibited this section from being saved:</h2>
+      <h2><%= pluralize(@section.errors.count, "error") %> prohibited this section from being saved:</h2>
 
       <ul>
-        <% section.errors.each do |error| %>
+        <% @section.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
       </ul>
@@ -29,6 +29,8 @@
     <% form.label :section_number %>
     <%= form.number_field :section_number, class:"form-control", placeholder:"Section Number" %>
   </div>
+
+  <%= form.hidden_field :course_id %>
 
   <br/>
 

@@ -11,18 +11,18 @@ class SectionsController < ApplicationController
 
   # GET /sections/new
   def new
-    @section = Section.new
+    @section = Section.new(course_id: params[:course_id])
     
   end
 
   # GET /sections/1/edit
   def edit
+    @section = Section.find(params[:id])
   end
 
   # POST /sections or /sections.json
   def create
-     @course = Course.find(params[:course_id])
-     @section = @course.sections.create(section_params)
+    @section = Section.new(section_params) 
      
 
     respond_to do |format|
@@ -40,7 +40,7 @@ class SectionsController < ApplicationController
   def update
     respond_to do |format|
       if @section.update(section_params)
-        format.html { redirect_to @section, notice: "Section was successfully updated." }
+        format.html { redirect_to course_sections_path, notice: "Section was successfully updated." }
         format.json { render :show, status: :ok, location: @section }
       else
         format.html { render :edit, status: :unprocessable_entity }
