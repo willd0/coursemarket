@@ -12,11 +12,12 @@ class LessonsController < ApplicationController
 
   # GET /lessons/new
   def new
-    @lesson = Lesson.new
+    @lesson = Lesson.new(section_id: params[:section_id])
   end
 
   # GET /lessons/1/edit
   def edit
+    @lesson = Lesson.find(params[:id])
   end
 
   # POST /lessons or /lessons.json
@@ -25,7 +26,7 @@ class LessonsController < ApplicationController
 
     respond_to do |format|
       if @lesson.save
-        format.html { redirect_to @lesson, notice: "Lesson was successfully created." }
+        format.html { redirect_to course_section_lessons_path, notice: "Lesson was successfully created." }
         format.json { render :show, status: :created, location: @lesson }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +39,7 @@ class LessonsController < ApplicationController
   def update
     respond_to do |format|
       if @lesson.update(lesson_params)
-        format.html { redirect_to @lesson, notice: "Lesson was successfully updated." }
+        format.html { redirect_to course_section_lessons_path, notice: "Lesson was successfully updated." }
         format.json { render :show, status: :ok, location: @lesson }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -51,7 +52,7 @@ class LessonsController < ApplicationController
   def destroy
     @lesson.destroy
     respond_to do |format|
-      format.html { redirect_to lessons_url, notice: "Lesson was successfully destroyed." }
+      format.html { redirect_to course_section_lessons_url, notice: "Lesson was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -64,6 +65,6 @@ class LessonsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def lesson_params
-      params.require(:lesson).permit(:name, :lesson_id, :lesson_number, :lesson_text)
+      params.require(:lesson).permit(:name, :lesson_id, :lesson_number, :lesson_text, :section_id)
     end
 end

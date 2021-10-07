@@ -15,5 +15,6 @@
   <%= @section.section_number %>
 </p>
 
+<%= link_to 'Add Lesson', new_course_section_lesson_path(:section_id => @section.id) %> |
 <%= link_to 'Edit', edit_course_section_path %> |
 <%= link_to 'Back', course_sections_path %>

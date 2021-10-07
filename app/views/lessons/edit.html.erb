@@ -2,9 +2,53 @@
 
 <br/>
 
-<%= render 'form', lesson: @lesson %>
+<%= form_with(model: @lesson, url: course_section_lesson_path(@lesson), method: "patch", local: true) do |form| %>
+  <% if @lesson.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@lesson.errors.count, "error") %> prohibited this lesson from being saved:</h2>
+
+      <ul>
+        <% @lesson.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <% form.label :name %>
+    <%= form.text_field :name, class:"form-control", placeholder:"Name" %>
+  </div>
+
+  <br/>
+
+  <div class="field">
+    <% form.label :lesson_id %>
+    <%= form.number_field :lesson_id, class:"form-control", placeholder:"Lesson Id" %>
+  </div>
+
+  <br/>
+
+  <div class="field">
+    <% form.label :lesson_number %>
+    <%= form.number_field :lesson_number, class:"form-control", placeholder:"Lesson Number" %>
+  </div>
+
+  <br/>
+
+  <div class="field">
+    <% form.label :lesson_text %>
+    <%= form.text_field :lesson_text, class:"form-control", placeholder:"Lesson Text" %>
+  </div>
+
+  <br/>
+
+  <div class="actions">
+    <%= form.submit class:"btn btn-success" %>
+  </div>
+<% end %>
 
 <br/>
 
-<%= link_to 'Show', @lesson %> |
-<%= link_to 'Back', lessons_path %>
+<%= link_to 'Show', course_section_lesson_path %> |
+<%= link_to 'Back', course_section_lessons_path %>
