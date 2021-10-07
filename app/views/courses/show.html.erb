@@ -15,7 +15,9 @@
   <%= @course.description %>
 </p>
 
-<%= link_to 'Add Section', new_course_section_path(@course.id) %>
+<%= link_to 'Sections', course_sections_path(@course.id) %> |
+<%= link_to 'Add Section', new_course_section_path(@course.id) %> |
 <%= link_to 'Edit', edit_course_path(@course) %> |
 <%= link_to 'Destroy', @course, method: :delete, data: { confirm: 'Are you sure?' } %> |
 <%= link_to 'Back', courses_path %>
+
