@@ -3,6 +3,7 @@ class LessonsController < ApplicationController
 
   # GET /lessons or /lessons.json
   def index
+    @section = Section.find(params[:section_id])
     @lessons = Lesson.all
   end
 

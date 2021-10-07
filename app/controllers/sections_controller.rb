@@ -2,6 +2,7 @@ class SectionsController < ApplicationController
   before_action :set_section, only: %i[ show edit update destroy ]
   # GET /sections or /sections.json
   def index
+    @course = Course.find(params[:course_id])
     @sections = Section.all
   end
 
