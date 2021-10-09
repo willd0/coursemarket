@@ -15,6 +15,7 @@
 
   <tbody>
     <% @lessons.each do |lesson| %>
+    <% if lesson.section_id == @section.id %>
       <tr>
         <td><%= lesson.name %></td>
         <td><%= lesson.lesson_id %></td>
@@ -24,6 +25,7 @@
         <td><%= link_to 'Edit', edit_course_section_lesson_path(lesson.section.course, :id => lesson) %></td>
         <td><%= link_to 'Destroy', course_section_lesson_path(lesson.section.course, :id => lesson), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
