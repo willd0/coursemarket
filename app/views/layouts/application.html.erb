@@ -14,9 +14,10 @@
     <%= render 'home/navbar' %>
   <div class="container">
     </br>
+    <% if notice %>
+      <%= render 'layouts/alerts' %>
+    <% end %>
     <%= yield %>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
   </div>
   </body>
 </html>
