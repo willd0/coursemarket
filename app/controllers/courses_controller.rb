@@ -1,6 +1,7 @@
 class CoursesController < ApplicationController
   before_action :set_course, only: %i[ show edit update destroy ]
-
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :correct_user, only: [:edit, :update, :destroy]
   # GET /courses or /courses.json
   def index
     @courses = Course.all
@@ -55,6 +56,12 @@ class CoursesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def correct_user
+    @course = current_user.course.find_by(id: params[:id])
+    redirect_to course_path, notice: "Not Authorized To Edit This Course" if @course.nil?
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
