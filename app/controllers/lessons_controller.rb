@@ -1,6 +1,7 @@
 class LessonsController < ApplicationController
   before_action :set_lesson, only: %i[ show edit update destroy ]
-
+  before_action :authenticate_user!
+  before_action :correct_user, only: [:edit, :update, :destroy]
   # GET /lessons or /lessons.json
   def index
     @section = Section.find(params[:section_id])
@@ -58,7 +59,15 @@ class LessonsController < ApplicationController
     end
   end
 
+  def correct_user
+    redirect_to course_section_lesson_path, notice: "Not Authorized To Edit This Lesson" if current_lesson.section.course.user != current_user
+  end
+
   private
+
+  def current_lesson
+    @current_lesson ||= Lesson.find(params[:id])
+  end
     # Use callbacks to share common setup or constraints between actions.
     def set_lesson
       @lesson = Lesson.find(params[:id])

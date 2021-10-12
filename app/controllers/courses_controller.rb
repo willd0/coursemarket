@@ -58,7 +58,7 @@ class CoursesController < ApplicationController
   end
 
   def correct_user
-    @course = current_user.course.find_by(id: params[:id])
+    @course = current_user.courses.find_by(id: params[:id])
     redirect_to course_path, notice: "Not Authorized To Edit This Course" if @course.nil?
   end
 

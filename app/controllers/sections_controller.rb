@@ -1,5 +1,7 @@
 class SectionsController < ApplicationController
   before_action :set_section, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!
+  before_action :correct_user, only: [:edit, :update, :destroy]
   # GET /sections or /sections.json
   def index
     @course = Course.find(params[:course_id])
@@ -59,7 +61,16 @@ class SectionsController < ApplicationController
     end
   end
 
+  def correct_user
+    
+    redirect_to course_section_path, notice: "Not Authorized To Edit This Section" if current_section.course.user != current_user
+  end
+
   private
+
+  def current_section
+    @current_section ||= Section.find(params[:id])
+  end
     # Use callbacks to share common setup or constraints between actions.
     def set_section
       @section = Section.find(params[:id])
