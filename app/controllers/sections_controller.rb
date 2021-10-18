@@ -14,6 +14,8 @@ class SectionsController < ApplicationController
 
   # GET /sections/new
   def new
+    @course = Course.find(params[:course_id])
+    redirect_to course_sections_path, notice: "Not Authorized to Create Sections for this Course" if @course.user != current_user
     @section = Section.new(course_id: params[:course_id])
     
   end
@@ -62,7 +64,6 @@ class SectionsController < ApplicationController
   end
 
   def correct_user
-    
     redirect_to course_section_path, notice: "Not Authorized To Edit This Section" if current_section.course.user != current_user
   end
 

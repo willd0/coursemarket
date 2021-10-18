@@ -14,6 +14,8 @@ class LessonsController < ApplicationController
 
   # GET /lessons/new
   def new
+    @section = Section.find(params[:section_id])
+    redirect_to course_section_lessons_path, notice: "Not Authorized to Create Lessons for this Section" if @section.course.user != current_user
     @lesson = Lesson.new(section_id: params[:section_id])
   end
 
