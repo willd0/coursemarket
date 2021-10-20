@@ -5,11 +5,14 @@ class LessonsController < ApplicationController
   # GET /lessons or /lessons.json
   def index
     @section = Section.find(params[:section_id])
+    redirect_to courses_path, notice: "Not Authorized to Access this Course" if (current_user.enrolled_in?(@section.course) == false) && (@section.course.user != current_user)
     @lessons = Lesson.all
   end
 
   # GET /lessons/1 or /lessons/1.json
   def show
+    @section = Section.find(params[:section_id])
+    redirect_to courses_path, notice: "Not Authorized to Access this Course" if (current_user.enrolled_in?(@section.course) == false) && (@section.course.user != current_user)
   end
 
   # GET /lessons/new
