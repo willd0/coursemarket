@@ -5,6 +5,13 @@ class CoursesController < ApplicationController
   # GET /courses or /courses.json
   def index
     @courses = Course.all
+
+    if params[:search] && params[:search] != ""
+      @courses = @courses.where(" name  LIKE ?", "%#{params[:search]}%")
+        if @courses.blank?
+          redirect_to courses_path, notice: "No courses were found with those search terms."
+        end
+    end
   end
 
   # GET /courses/1 or /courses/1.json

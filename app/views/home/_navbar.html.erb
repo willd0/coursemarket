@@ -25,10 +25,18 @@
         </li>
         <% end %>
       </ul>
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+      <div>
+       <%= form_tag "/", method: "GET" do %>
+          <div class="field">
+            <%= text_field_tag :search, params[:search], placeholder:"Search", class:"form-control" %>
+          </div>
+      </div>
+        <div class="actions" style="margin-left: 8px">
+          <%= submit_tag "Search", class:'btn btn-outline-success' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
     </div>
   </div>
 </nav>
