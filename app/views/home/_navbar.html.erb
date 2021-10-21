@@ -24,6 +24,10 @@
           <%= link_to "Sign In", new_user_session_path, class:"nav-link" %>
         </li>
         <% end %>
+
+        <li class="nav-item">
+          <%= link_to "My Courses", enrollments_index_path, class:"nav-link" %>
+        </li>
       </ul>
       <div>
        <%= form_tag "/", method: "GET" do %>

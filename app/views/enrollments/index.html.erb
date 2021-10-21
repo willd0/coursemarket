@@ -1,0 +1,49 @@
+
+<h1>My Courses</h1>
+<br/>
+<div class="p-5 mb-4 bg-light rounded-3">
+  <h2>Teaching</h2>
+<div class="container-fluid py-5"> 
+
+<div class="horizontal-scrollable">
+
+<% @mycourses.each do |course| %>
+<div class="item">
+<div class="card card text-white bg-primary" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title"><%= course.name %></h5>
+    <p class="card-text"><%= course.description %></p>
+    <a href="/courses/<%= course.id %>" class="stretched-link"></a>
+  </div>
+</div>
+<br/>
+</div>
+<% end %>
+</div>
+</div>
+</div>
+
+<div class="p-5 mb-4 bg-light rounded-3">
+  <h2>Enrolled In</h2>
+<div class="container-fluid py-5"> 
+
+<div class="horizontal-scrollable">
+
+<% @courses.each do |course| %>
+<% if current_user.enrolled_in?(course) %>
+<div class="item">
+<div class="card card text-white bg-primary" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title"><%= course.name %></h5>
+    <p class="card-text"><%= course.description %></p>
+    <a href="/courses/<%= course.id %>" class="stretched-link"></a>
+  </div>
+</div>
+<br/>
+</div>
+<% end %>
+<% end %>
+
+</div>
+</div>
+</div>

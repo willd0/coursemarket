@@ -4,6 +4,11 @@ before_action :authenticate_user!
   current_user.enrollments.create(course: current_course)  
   redirect_to course_path(current_course)
   end
+
+  def index
+    @mycourses = current_user.courses
+    @courses = Course.all
+  end
   
   private
 
