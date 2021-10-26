@@ -57,3 +57,5 @@ gem 'bootstrap', '~> 5.1.0'
 gem 'jquery-rails'
 
 gem 'devise', '~> 4.8'
+
+gem 'stripe', '~> 5.39'
