@@ -19,7 +19,7 @@
         <td><%= section.name %></td>
         <td><%= section.section_id %></td>
         <td><%= section.section_number %></td>
-        <td><%= link_to 'Show', course_section_path(section.course, section) %></td>
+        <td><%= link_to 'Lessons', course_section_lessons_path(section.course, section) %></td>
         <td><%= link_to 'Edit', edit_course_section_path(section.course, section) %></td>
         <td><%= link_to 'Destroy', course_section_path(section.course, section), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
